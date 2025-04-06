@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
+<H3>Name: Anbuselvan.S</H3>
+<H3>Register No: 212223240008.</H3>
 <H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3>Date: </H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,12 +37,51 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
-
+### Import packages:
+```
+import io
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import train_test_split
+```
+### Data preprocessing:
+```
+df=pd.read_csv("Churn_Modelling.csv",index_col="RowNumber")
+df.head()
+df.isnull().sum()
+df.duplicated().sum()
+df = df.drop(['Surname', 'Geography', 'Gender'], axis=1)
+```
+### Scaling:
+```
+scaler=StandardScaler()
+df=pd.DataFrame(scaler.fit_transform(df))
+df.head()
+```
+### training and testing splitting:
+```
+X,Y=df.iloc[:,:-1].values,df.iloc[:,-1].values
+xtrain,xtest,ytrain,ytest=train_test_split(X,Y,test_size=0.5)
+print("Full X:", X.shape)
+print("Train X:", xtrain.shape)
+print("Test X:", xtest.shape)
+print("Full Y:", Y.shape)
+print("Train Y:", ytrain.shape)
+print("Test Y:", ytest.shape)
+```
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+### Original dataset:
+![image](https://github.com/user-attachments/assets/5a7976ea-2305-49f2-8e5c-e4aa73920353)
 
+### Summation of null values:
+![image](https://github.com/user-attachments/assets/84d51dd0-2d8c-4afd-b72e-a0f808e71ca1)
+
+### Scaled dataset:
+![image](https://github.com/user-attachments/assets/f6c7e954-d57c-440e-8445-9b0fad3c7c6d)
+
+### Train and test data comparison:
+![image](https://github.com/user-attachments/assets/f96713e2-8c12-406d-9fa9-8dae848e333a)
 
 ## RESULT:
 Thus, Implementation of Data Preprocessing is done in python  using a data set downloaded from Kaggle.
